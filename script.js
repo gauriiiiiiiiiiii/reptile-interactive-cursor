@@ -501,7 +501,7 @@ var Input = {
     for (var i = 0; i < 6; i++) {
       spinal = new Segment(spinal, s * 4, 0, 3.1415 * 2 / 3, 1.1);
       for (var ii = -1; ii <= 1; ii += 2) {
-        var node = new Segment(spinal, s * 3, ii, 0.1, 2);
+        var node = new Segment(spinal, s * 2, ii, 0.1, 2);
         for (var iii = 0; iii < 3; iii++) {
           node = new Segment(node, s * 0.1, -ii * 0.1, 0.1, 2);
         }
@@ -511,27 +511,24 @@ var Input = {
     for (var i = 0; i < legs; i++) {
       if (i > 0) {
         //Vertebrae and ribs
-        for (var ii = 0; ii < 6; ii++) {
+        for (var ii = 0; ii < 8; ii++) {
           spinal = new Segment(spinal, s * 4, 0, 1.571, 1.5);
           for (var iii = -1; iii <= 1; iii += 2) {
-            var node = new Segment(spinal, s * 3, iii * 1.571, 0.1, 1.5);
+            var node = new Segment(spinal, s * 2, iii * 1.571, 0.1, 1.5);
             for (var iv = 0; iv < 3; iv++) {
-              node = new Segment(node, s * 3, -iii * 0.3, 0.1, 2);
+              node = new Segment(node, s * 2, -iii * 0.3, 0.1, 2);
             }
           }
         }
       }
       //Legs and shoulders
       for (var ii = -1; ii <= 1; ii += 2) {
-        var node = new Segment(spinal, s * 12, ii * 0.785, 0, 8); //Hip
-        node = new Segment(node, s * 16, -ii * 0.785, 6.28, 1); //Humerus
-        node = new Segment(node, s * 16, ii * 1.571, 3.1415, 2); //Forearm
-        for (
-          var iii = 0;
-          iii < 4;
-          iii++ //fingers
-        ) {
-          new Segment(node, s * 4, (iii / 3 - 0.5) * 1.571, 0.1, 4);
+        var node = new Segment(spinal, s * 10, ii * 0.785, 0, 8);
+        node = new Segment(node, s * 14, -ii * 0.785, 6.28, 1);
+        node = new Segment(node, s * 14, ii * 1.571, 3.1415, 2);
+        for (var iii = 0; iii < 4; iii++)
+        {
+          new Segment(node, s * 3, (iii / 3 - 0.5) * 1.571, 0.1, 4);
         }
         new LegSystem(node, 3, s * 12, critter, 4);
       }
@@ -540,9 +537,9 @@ var Input = {
     for (var i = 0; i < tail; i++) {
       spinal = new Segment(spinal, s * 4, 0, 3.1415 * 2 / 3, 1.1);
       for (var ii = -1; ii <= 1; ii += 2) {
-        var node = new Segment(spinal, s * 3, ii, 0.1, 2);
+        var node = new Segment(spinal, s * 2, ii, 0.1, 2);
         for (var iii = 0; iii < 3; iii++) {
-          node = new Segment(node, s * 3 * (tail - i) / tail, -ii * 0.1, 0.1, 2);
+          node = new Segment(node, s * 2 * (tail - i) / tail, -ii * 0.1, 0.1, 2);
         }
       }
     }
@@ -557,9 +554,8 @@ var Input = {
   //setupTentacle();//Tentacle that reaches for mouse
   //setupLizard(.5,100,128);//Literal centipede
   //setupSquid(2,8);//Spidery thing
-  var legNum = Math.floor(1 + Math.random() * 12);
   setupLizard(
-    8 / Math.sqrt(legNum),
-    legNum,
-    Math.floor(4 + Math.random() * legNum * 8)
+    2,      // Smaller base size for thinner segments
+    6,      // 6 legs for longer body
+    24      // Longer tail
   );
